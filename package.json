@@ -37,6 +37,7 @@
     "firebase": "^6.2.4",
     "intro.js": "^2.9.3",
     "jekyll": "^3.0.0-beta1",
+    "jquery": "^3.4.1",
     "node-sass": "^4.9.0",
     "notes-frequencies": "^1.0.0",
     "p5": "^0.6.1",

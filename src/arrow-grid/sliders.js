@@ -1,13 +1,16 @@
-// const onSlideChange = (onChange) => (position, value) => {
-//     onChange(value)
-// };
+import $ from 'jquery';
+import {rangeslider} from 'rangeslider.js';
 
-// export const setSliderOnChange = (targetIdsAndCallbacks) => $(() => {
-//     targetIdsAndCallbacks.map(({id, onChange})=>{
-//         $(id).rangeslider({
-//             polyfill: false,
-//             onSlide: onSlideChange(onChange),
-//             onSlideEnd: onSlideChange(onChange)
-//         });
-//     });
-// });
+const onSlideChange = (onChange) => (position, value) => {
+    onChange(value);
+};
+
+export const setSliderOnChange = (targetIdsAndCallbacks) => $(() => {
+    targetIdsAndCallbacks.map(({id, onChange}) => {
+        $(id).rangeslider({
+            polyfill: false,
+            onSlide: onSlideChange(onChange),
+            onSlideEnd: onSlideChange(onChange)
+        });
+    });
+});

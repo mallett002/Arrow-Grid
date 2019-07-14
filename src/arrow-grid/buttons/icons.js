@@ -18,9 +18,9 @@ export const ResizeIcon = () => (
         src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGhSURBVGhD7ddNTgJBEIZhDin+oKJsvJMH8BQu3bryOhqweuZNMU53dWCsKcT0k7SJPR/1Y4joYmdYVGy32w9iGXm2IpZJz4hlUk1iRcQybYGxtoCBWCZ7QP7PYkx1/gs0TdP8L/x2m4wyh5NPwOfh4Xoy5piMMiaJvA+P+wcDZSajjImYagscS96mF3I+aZchZiKmQheQ8sva8AlREzEVtoAMfiXnizad0jLETcRUyAKV4Zf9d3u8xERMpeKvw0POjdS8kTMePn2/TM/7m73uRRUSeRoeruchg65Kw8u5JBLyDphEhrw1hr8m0uGR4vq0ZMj7Q4ZPeKy4Ph0Zcm0MX/xnn4ji+jRkyAdj+DsiGWKK63gy5ObY4ROiiutYleHXREzEFdcmifz8NSpf3LHMIz1d9R323BfgJ7+hnzvaqDkWmG34hDbKfQH6zIY2qi0wRp/Z0Ead4wL1f+p/iz5x6OuGsnHo64aycejrhrJx6OuGsnHo64aycejrhrJx6OuGsrOhjWoLjNGnSP5SfSGWkWdvxIqIZdoCY/QragtkdrtvCZSgb/wP8RYAAAAASUVORK5CYII='/>
 )
 export const ArrowIcon = ({direction}) => (
-    <svg class={'Icon PlayIcon ' + direction} viewBox='0 0 100 100'>
+    <svg className={'Icon PlayIcon ' + direction} viewBox='0 0 100 100'>
         <polygon
-            class='Icon-shape'
+            className='Icon-shape'
             points='24,7 24,92 100,50 82,50 60,62 60,53 33,53 33,47 60,47 60,38 82,50 100,50'
         >
         </polygon>
@@ -28,26 +28,26 @@ export const ArrowIcon = ({direction}) => (
 )
 
 export const PlusIcon = () => (
-    <svg class={'Icon PlayIcon'} viewBox='0 0 100 100'><polygon class='Icon-shape' points='45 10, 55 10, 55 45, 90 45, 90 55, 55 55, 55 90 45 90, 45 55, 10 55, 10 45, 45 45'></polygon></svg>
+    <svg className={'Icon PlayIcon'} viewBox='0 0 100 100'><polygon className='Icon-shape' points='45 10, 55 10, 55 45, 90 45, 90 55, 55 55, 55 90 45 90, 45 55, 10 55, 10 45, 45 45'></polygon></svg>
 )
 export const SmallGridIcon = () => (
-    <svg class={'Icon PlayIcon min-icon'} viewBox='0 0 100 100'>
-        <polygon points="10,10 10,90 90,90 90,10" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="50,10 50,90" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="10,50 90,50" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="10,10 50,30 10,50" style={{fill:'white',stroke:'white','stroke-width':1}} />
+    <svg className={'Icon PlayIcon min-icon'} viewBox='0 0 100 100'>
+        <polygon points="10,10 10,90 90,90 90,10" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="50,10 50,90" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="10,50 90,50" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="10,10 50,30 10,50" style={{fill:'white',stroke:'white','strokeWidth':1}} />
     </svg>
 )
 export const LargeGridIcon = () => (
-    <svg class={'Icon PlayIcon max-icon'} viewBox='0 0 100 100'>
-        <polygon points="10,10 10,90 90,90 90,10" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="30,10 30,90" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="50,10 50,90" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="70,10 70,90" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="10,30 90,30" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="10,50 90,50" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="10,70 90,70" style={{fill:'transparent',stroke:'white','stroke-width':2}} />
-        <polygon points="10,10 30,20 10,30" style={{fill:'white',stroke:'white','stroke-width':1}} />
+    <svg className={'Icon PlayIcon max-icon'} viewBox='0 0 100 100'>
+        <polygon points="10,10 10,90 90,90 90,10" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="30,10 30,90" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="50,10 50,90" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="70,10 70,90" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="10,30 90,30" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="10,50 90,50" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="10,70 90,70" style={{fill:'transparent',stroke:'white','strokeWidth':2}} />
+        <polygon points="10,10 30,20 10,30" style={{fill:'white',stroke:'white','strokeWidth':1}} />
     </svg>
 )
 

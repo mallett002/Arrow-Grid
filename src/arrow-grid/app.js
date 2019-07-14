@@ -92,7 +92,7 @@ export class Application extends React.Component {
             {id: '#grid-size-slider', onChange: this.newSize},
             {id: '#note-length-slider', onChange: this.newNoteLength}
         ];
-        // setSliderOnChange(idsAndCallbacks);
+        setSliderOnChange(idsAndCallbacks);
         getAdderWithMousePosition(this.addToGrid)();
     }
 
