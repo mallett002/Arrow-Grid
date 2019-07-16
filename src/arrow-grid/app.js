@@ -1,4 +1,5 @@
 import React from 'react';
+import introJs from 'intro.js';
 import {
     PlayButton,
     PauseButton,
@@ -69,7 +70,7 @@ export class Application extends React.Component {
         super(props);
 
         this.state = {
-            tut: 'TutorialButtonStartGreen',
+            tut: '',
             currentPreset: -1,
             presets,
             inputDirection: 0,
@@ -248,7 +249,19 @@ export class Application extends React.Component {
                             <button
                                 title="Start Tutorial"
                                 className={"TutorialButton isEnabled " + this.state.tut} 
-                                onClick={this.removeTutHighlight}
+                                onClick={()=>{
+                                    introJs()
+                                    .setOption('hideNext', true)
+                                    .setOption('hidePrev', true)
+                                    .setOption('showBullets', false)
+                                    .setOption('nextLabel', '')
+                                    .setOption('prevLabel', '')
+                                    .setOption('skipLabel', '')
+                                    .setOption('doneLabel', '')
+                                    .setOption('showStepNumbers', false)
+                                    .setOption('exitOnOverlayClick', false)
+                                    .start();
+                                }}
                             >
                                 <InfoIcon/>
                             </button>
@@ -281,7 +294,7 @@ export class Application extends React.Component {
                     <div
                         className="edit-options-member"
                         data-step="8"
-                        data-intro="Hear the thing."
+                        data-intro="Hear the thing"
                         title="Sound On/Off"
                     >
                         <MuteToggleButton
@@ -297,7 +310,7 @@ export class Application extends React.Component {
                     <div
                         className="edit-options-member"
                         data-step="5"
-                        data-intro="Swipe Right!"
+                        data-intro="Swipe Right"
                     >
                         <div
                             className="edit-options-member"
@@ -419,7 +432,7 @@ export class Application extends React.Component {
                     <div
                         className="edit-options-member"
                         data-step="1"
-                        data-intro="Start the thing."
+                        data-intro="Start the thing"
                     >
                         <div
                             // data-step="7"
@@ -440,7 +453,7 @@ export class Application extends React.Component {
                     <div
                         className="edit-options-member" 
                         data-step="2"
-                        data-intro="Change the thing."
+                        data-intro="Change the thing"
                     >
                     <div
                         className="edit-options-member" 
@@ -471,7 +484,7 @@ export class Application extends React.Component {
                     <div
                         className="edit-options-member"
                         data-step="4"
-                        data-intro="Trash the thing."
+                        data-intro="Trash the thing"
                     >
                         <TrashButton onClick={this.emptyGrid}/>
                     </div>
