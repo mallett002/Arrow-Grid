@@ -86,8 +86,8 @@ export class Application extends React.Component {
             backwardDiagonalSymmetry: false,
             forwardDiagonalSymmetry: false,
             inputNumber: 1,
-            scales,
-            musicalKey
+            scale: [0,2,4,5,7,9,11,12],
+            musicalKey: 0
         };
         setUpCanvas(this.state);
     }
