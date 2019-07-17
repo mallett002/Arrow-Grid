@@ -8,23 +8,24 @@ function onMIDIFail(err) {
     // console.log(`MIDI initialization failed. ${err}`);
 }
 
-export const makeMIDImessage = (index, length) => {
-    const midiKeyNumbers = [
-        45, 47, 48, 50, 52, 54, 55, 57, 59, 61, 62, 64, 66, 67, 69, 71, 73, 74
-    ];
-    const noteIndex = index % midiKeyNumbers.length;
+export const makeMIDImessage = (index, length, scale, musicalKey) => {
+    // const midiKeyNumbers = [
+    //     45, 47, 48, 50, 52, 54, 55, 57, 59, 61, 62, 64, 66, 67, 69, 71, 73, 74
+    // ];
+    const noteIndex = index % scale.length;
+    const noteToPlay = musicalKey+scale[noteIndex];
 
     return {
         play() {
             (midiOut || { send: () => { } }).send([
                 0x90,
-                midiKeyNumbers[noteIndex],
+                noteToPlay,
                 0x40,
             ]);
             setTimeout(() => {
                 (midiOut || { send: () => { } }).send([
                     0x80,
-                    midiKeyNumbers[noteIndex],
+                    noteToPlay,
                     0x00,
                 ]);
             }, length - 1);

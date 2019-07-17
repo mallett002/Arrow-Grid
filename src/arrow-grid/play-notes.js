@@ -58,7 +58,7 @@ export const makePizzaSound = (index, length, volume = .5) => {
     }
     return lengthSounds[length][noteIndex]
 };
-export const playSounds = (boundaryArrows, size, length, muted) => {
+export const playSounds = (boundaryArrows, size, length, muted, scale, musicalKey) => {
     const alreadyPlayedMap = {};
     var sounds = [];
     
@@ -70,7 +70,7 @@ export const playSounds = (boundaryArrows, size, length, muted) => {
             const snd = makePizzaSound(speed, length);
             sounds.push(snd);
         }
-        makeMIDImessage(speed, length).play();
+        makeMIDImessage(speed, length, scale, musicalKey).play();
         return undefined;
     });
     if (!muted){
