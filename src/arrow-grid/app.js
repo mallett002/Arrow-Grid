@@ -39,12 +39,6 @@ import Dropdown from 'react-dropdown';
 
 const chance = new Chance();
 
-const getScaleName = (scale) => {
-    Object.values(scales).find(scale => {
-        
-    });
-};
-
 const clickNext = () => {
     const nextButtonElement = document.querySelectorAll('.introjs-button.introjs-nextbutton')[0];
     if (nextButtonElement) nextButtonElement.click();
@@ -239,30 +233,17 @@ export class Application extends React.Component {
         const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farrowgrid.sagaciasoft.com/?data=${gridString}&amp;src=sdkpreparse`;
         window.open(shareUrl,'newwindow','width=300,height=250');return false;
     }
+
+    handleSelect = (scale) => {
+        this.setState({scale});
+    };
+
     render() {
-        const options = Object.keys(scales).map(scale => {
-                return {
-                    value: scale,
-                    label: scales[scale]
-                }
-            }
-        );
-                // const options = [
-        //     { value: 'one', label: 'One' },
-        //     { value: 'two', label: 'Two', className: 'myOptionClassName' },
-        //     {
-        //      type: 'group', name: 'group1', items: [
-        //        { value: 'three', label: 'Three', className: 'myOptionClassName' },
-        //        { value: 'four', label: 'Four' }
-        //      ]
-        //     },
-        //     {
-        //      type: 'group', name: 'group2', items: [
-        //        { value: 'five', label: 'Five' },
-        //        { value: 'six', label: 'Six' }
-        //      ]
-        //     }
-        // ];
+        const options = Object.values(scales).map(scale => ({
+            value: scale.nots,
+            label: scale.name
+        }));
+
         const newDate = new Date();
         updateCanvas(this.state, newDate);
         return (
@@ -549,13 +530,9 @@ export class Application extends React.Component {
                 
                 <Dropdown
                     options={options}
-                    onChange={(e)=>{
-                        this.setState({
-                            scale: e.label
-                        })
-                    }}
-                    value={this.state.scale.join('-')}
-                    placeholder="Select an scale"
+                    onChange={this.handleSelect}
+                    value={this.state.scale.name}
+                    placeholder="Select a scale"
                 />
             </div>
         );
