@@ -189,7 +189,7 @@ export const getArrowBoundaryDictionary = (arrows, size, keyFunc, rotations) => 
     , {},
 );
 
-export const nextGrid = (grid, length, scale, key) => {
+export const nextGrid = (grid, length, scale, musicalKey) => {
     const {
         size,
         arrows
@@ -224,7 +224,7 @@ export const nextGrid = (grid, length, scale, key) => {
         ...movedFlippedBoundaryArrows,
     ]
     const noisyArrowBoundaryDictionary = getArrowBoundaryDictionary(nextGridArrows, size, arrowBoundaryKey);
-    playSounds(newArrayIfFalsey(noisyArrowBoundaryDictionary[BOUNDARY]), size, length, grid.muted, scale, key);
+    playSounds(newArrayIfFalsey(noisyArrowBoundaryDictionary[BOUNDARY]), size, length, grid.muted, scale, musicalKey);
     return {
         ...grid,
         id: chance.guid(),

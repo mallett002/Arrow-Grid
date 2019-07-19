@@ -39,6 +39,12 @@ import Dropdown from 'react-dropdown';
 
 const chance = new Chance();
 
+const getScaleName = (scale) => {
+    Object.values(scales).find(scale => {
+        
+    });
+};
+
 const clickNext = () => {
     const nextButtonElement = document.querySelectorAll('.introjs-button.introjs-nextbutton')[0];
     if (nextButtonElement) nextButtonElement.click();
@@ -86,8 +92,8 @@ export class Application extends React.Component {
             backwardDiagonalSymmetry: false,
             forwardDiagonalSymmetry: false,
             inputNumber: 1,
-            scale: [0,2,4,5,7,9,11,12],
-            musicalKey: 0
+            scale: scales.major,
+            musicalKey: 45
         };
         setUpCanvas(this.state);
     }
@@ -234,9 +240,11 @@ export class Application extends React.Component {
         window.open(shareUrl,'newwindow','width=300,height=250');return false;
     }
     render() {
-        const options = Object.keys(scales).map(
-            (scale)=>{
-                return {value: scale, label: scales[scale]}
+        const options = Object.keys(scales).map(scale => {
+                return {
+                    value: scale,
+                    label: scales[scale]
+                }
             }
         );
                 // const options = [
@@ -541,8 +549,12 @@ export class Application extends React.Component {
                 
                 <Dropdown
                     options={options}
-                    onChange={(e)=>{console.log(e)}}
-                    value={this.state.scale}
+                    onChange={(e)=>{
+                        this.setState({
+                            scale: e.label
+                        })
+                    }}
+                    value={this.state.scale.join('-')}
                     placeholder="Select an scale"
                 />
             </div>
