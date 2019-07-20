@@ -155,9 +155,7 @@ export class Application extends React.Component {
                 id: chance.guid(),
                 muted: this.state.muted
             },
-            length,
-            this.state.scale,
-            this.state.musicalKey)
+            length)
         });
     }
     newInputDirection = (inputDirection) => {
@@ -239,8 +237,9 @@ export class Application extends React.Component {
     };
 
     render() {
+        console.log('state scale:', this.state.scale);
         const options = Object.values(scales).map(scale => ({
-            value: scale.nots,
+            value: scale.notes,
             label: scale.name
         }));
 
@@ -531,8 +530,8 @@ export class Application extends React.Component {
                 <Dropdown
                     options={options}
                     onChange={this.handleSelect}
-                    value={this.state.scale.name}
-                    placeholder="Select a scale"
+                    value={this.state.scale.label}
+                    placeholder={this.state.scale.name}
                 />
             </div>
         );

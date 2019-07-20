@@ -10,7 +10,6 @@ const scales = {
     '3 semitone': [0,3,6,9,12],
     '4 semitone': [0,4,8,12],
     'locrian ultra': [0,1,3,4,6,8,9,12],
-    'locrian super': [0,1,3,4,6,8,10,12],
     'indian': [0,1,3,4,7,8,10,12],
     'locrian': [0,1,3,5,6,8,10,12],
     'phrygian': [0,1,3,5,7,8,10,12],
