@@ -22,7 +22,7 @@ const musicalNotes = range(1, 7).reduce((accum, curr) => {
 function createNotesString(musicalKey, scale) {
     // generate, out of 7 octives, a range from a - g.
     // a1, b1, ...g1, a2, b2, c2...g7 (the end).
-    
+
 }
 
 // const frequencies = notesFrequencies('C3 D3 E3 F3 G3 A3 B3 C4 D4 E4 F4 G4 A4 B4 C5 D5 E5 F5 G5 A5');//c Scale
@@ -67,7 +67,7 @@ const sounds = (length) => frequencies.map((freq, noteIndex)=>{
 export const makePizzaSound = (index, length, scale, musicalKey) => {
     //cacheSounds!
     // const frequencies = notesFrequencies('D3 F3 G#3 C4 D#4 G4 A#5');
-    const noteIndex = index % scale.length;
+    const noteIndex = index % scale.value.length;
     const noteToPlay = musicalKey + scale[noteIndex];
 
     if (!lengthSounds[length]){

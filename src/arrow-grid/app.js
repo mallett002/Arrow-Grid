@@ -86,7 +86,7 @@ export class Application extends React.Component {
             backwardDiagonalSymmetry: false,
             forwardDiagonalSymmetry: false,
             inputNumber: 1,
-            scale: scales.major,
+            scale: scales[0],
             musicalKey: 45
         };
         setUpCanvas(this.state);
@@ -155,7 +155,9 @@ export class Application extends React.Component {
                 id: chance.guid(),
                 muted: this.state.muted
             },
-            length)
+            length,
+            this.state.scale,
+            this.state.musicalKey)
         });
     }
     newInputDirection = (inputDirection) => {
@@ -232,17 +234,11 @@ export class Application extends React.Component {
         window.open(shareUrl,'newwindow','width=300,height=250');return false;
     }
 
-    handleSelect = (scale) => {
+    updateScale = (scale) => {
         this.setState({scale});
     };
 
     render() {
-        console.log('state scale:', this.state.scale);
-        const options = Object.values(scales).map(scale => ({
-            value: scale.notes,
-            label: scale.name
-        }));
-
         const newDate = new Date();
         updateCanvas(this.state, newDate);
         return (
@@ -528,10 +524,10 @@ export class Application extends React.Component {
                 </select>
                 
                 <Dropdown
-                    options={options}
-                    onChange={this.handleSelect}
+                    options={scales}
+                    onChange={this.updateScale}
                     value={this.state.scale.label}
-                    placeholder={this.state.scale.name}
+                    placeholder={this.state.scale.label}
                 />
             </div>
         );

@@ -61,11 +61,7 @@ const scales = {
     'bebop tonic minor': [0,2,3,5,7,8,9,11,12]
 };
 
-export default Object.keys(scales).reduce((scalesObj, scale) => {
-    scalesObj[scale] = {
-        name: scale,
-        notes: scales[scale]
-    };
-    
-    return scalesObj;
-}, {}); 
+export default Object.keys(scales).map((scale) => ({
+    label: scale,
+    value: scales[scale]
+})); 

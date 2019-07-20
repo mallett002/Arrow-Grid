@@ -12,7 +12,7 @@ export const makeMIDImessage = (index, length, scale, musicalKey) => {
     // const midiKeyNumbers = [
     //     45, 47, 48, 50, 52, 54, 55, 57, 59, 61, 62, 64, 66, 67, 69, 71, 73, 74
     // ];
-    const noteIndex = index % scale.length;
+    const noteIndex = index % scale.value.length;
     const noteToPlay = musicalKey+scale[noteIndex];
 
     return {
