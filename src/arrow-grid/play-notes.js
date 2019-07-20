@@ -13,24 +13,31 @@ const getIndex = (x, y, size, vector) => {
     return 0;
 };
 
-const musicalNotes = range(1, 7).reduce((accum, curr) => {
-    return accum.concat('a b c d e f g'.split(" ").map(char => {
-        return `${char}${curr}`;
+// flat ♭
+
+const musicalNotes = range(0, 8).reduce((accum, curr) => {
+    return accum.concat('a a# b c c# d d# e f f# g g#'.split(" ").map(char => {
+        return `${char}${'a# b'.includes(char) ? curr : curr + 1}`;
     }));
 }, []).join(" ");
 
 function createNotesString(musicalKey, scale) {
-    // generate, out of 7 octives, a range from a - g.
-    // a1, b1, ...g1, a2, b2, c2...g7 (the end).
+    const offsetScale = scale.map(noteInt => {
+        return noteInt + musicalKey;
+    });
 
+    return offsetScale.map(noteInt => {
+        return musicalNotes[noteInt - 21];
+    }).join(" ");
 }
 
 // const frequencies = notesFrequencies('C3 D3 E3 F3 G3 A3 B3 C4 D4 E4 F4 G4 A4 B4 C5 D5 E5 F5 G5 A5');//c Scale
-const frequencies = notesFrequencies('e3 a3 b3 c4 e4 f4 a4 b4 e5 a5 b5 c6 e6 f6 a6 b6 e7');//ake bono scale
+// const frequencies = notesFrequencies('e3 a3 b3 c4 e4 f4 a4 b4 e5 a5 b5 c6 e6 f6 a6 b6 e7');//ake bono scale
 // const frequencies = notesFrequencies('e3 b3 d4 e4 g4 a4 d5 e5 b5 d6 e6 g6 a6 d7 e7');//Yue-Diao scale
 // const frequencies = notesFrequencies('e3 a3 b3 C3 D3 E3 F3 G3 A3 E4 F4 G4 A4');//Bayati scale
 const lengthSounds = {};
-const sounds = (length) => frequencies.map((freq, noteIndex)=>{
+const sounds = (length, musicalKey, scale) => 
+    notesFrequencies(createNotesString(musicalKey, scale)).map((freq, noteIndex) => {
     const aSound = new Pizzicato.Sound({
         source: 'wave',
         options: {
@@ -64,16 +71,21 @@ const sounds = (length) => frequencies.map((freq, noteIndex)=>{
     return aSound;
 });
 
+function generateHash(length, musicalKey, scale) {
+    return length;
+}
+
 export const makePizzaSound = (index, length, scale, musicalKey) => {
     //cacheSounds!
     // const frequencies = notesFrequencies('D3 F3 G#3 C4 D#4 G4 A#5');
     const noteIndex = index % scale.value.length;
     const noteToPlay = musicalKey + scale[noteIndex];
-
-    if (!lengthSounds[length]){
-        lengthSounds[length] = sounds(length);
+    const hash = generateHash(length, musicalKey, scale);
+    
+    if (!lengthSounds[hash]){
+        lengthSounds[hash] = sounds(length, musicalKey, scale);
     }
-    return lengthSounds[length][noteIndex]
+    return lengthSounds[hash][noteIndex]
 };
 
 export const playSounds = (boundaryArrows, size, length, muted, scale, musicalKey) => {
