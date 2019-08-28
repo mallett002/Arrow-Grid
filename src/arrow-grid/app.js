@@ -6,12 +6,18 @@ import {
     PauseButton,
     MuteToggleButton,
     PrevButton,
-    NextButton
+    NextButton,
 } from 'react-player-controls';
 import {
     makePizzaSound,
     musicalNotes
 } from './play-notes';
+import {
+    SymmetryButton
+} from './buttons/symmetry-button';
+import {
+    PlusButton
+} from './buttons/plus-button';
 import {
     emptyGrid,
     newGrid,
@@ -426,6 +432,51 @@ export class Application extends React.Component {
                         </div>
                     </div>
                 </div>
+                
+                
+                <SymmetryButton 
+                    onClick={
+                        ()=>this.setState({
+                            backwardDiagonalSymmetry: !this.state.backwardDiagonalSymmetry
+                        }
+                    )}
+                    isActive={this.state.backwardDiagonalSymmetry}
+                    className={"backward-diag"}
+                />
+                <SymmetryButton
+                    onClick={
+                        ()=>this.setState({
+                            forwardDiagonalSymmetry: !this.state.forwardDiagonalSymmetry
+                        }
+                    )}
+                    isActive={this.state.forwardDiagonalSymmetry}
+                    className={"forward-diag"}
+                />
+                <SymmetryButton
+                    onClick={
+                        ()=>this.setState({
+                            horizontalSymmetry: !this.state.horizontalSymmetry
+                        }
+                    )}
+                    isActive={this.state.horizontalSymmetry}
+                    className={"horizontal"}
+                />
+                <SymmetryButton
+                    onClick={
+                        ()=>this.setState({
+                            verticalSymmetry: !this.state.verticalSymmetry
+                        }
+                    )}
+                    isActive={this.state.verticalSymmetry}
+                    className={""}
+                />
+                <PlusButton 
+                    onClick={
+                        ()=>this.setState({
+                            inputNumber: ((this.state.inputNumber + 1) % 5) || 1
+                        }
+                    )}
+                />
                 <div className="edit-options">
                     {/*<PlusButton 
                         onClick={this.addPreset}
@@ -510,7 +561,7 @@ export class Application extends React.Component {
                     </div>
                     <div className= "spacer-div-next-to-trash">
                         <h4>
-                        Draw Mode: {!this.state.deleting ? ''+["Up","Right","Down","Left"][this.state.inputDirection]+' Arrows': 'Eraser'}
+                            Draw Mode: {!this.state.deleting ? `${this.state.inputNumber}x `+["Up","Right","Down","Left"][this.state.inputDirection]+' Arrows': 'Eraser'}
                         </h4>
                     </div>
                     <div
@@ -548,50 +599,3 @@ export class Application extends React.Component {
         );
     }
 }
-
-
-
-
-
-                    /* <SymmetryButton 
-                        onClick={
-                            ()=>this.setState({
-                                backwardDiagonalSymmetry: !this.state.backwardDiagonalSymmetry
-                            }
-                        )}
-                        isActive={this.state.backwardDiagonalSymmetry}
-                        className={"backward-diag"}
-                    />
-                    <SymmetryButton
-                        onClick={
-                            ()=>this.setState({
-                                forwardDiagonalSymmetry: !this.state.forwardDiagonalSymmetry
-                            }
-                        )}
-                        isActive={this.state.forwardDiagonalSymmetry}
-                        className={"forward-diag"}
-                    />
-                    <SymmetryButton
-                        onClick={
-                            ()=>this.setState({
-                                horizontalSymmetry: !this.state.horizontalSymmetry
-                            }
-                        )}
-                        isActive={this.state.horizontalSymmetry}
-                        className={"horizontal"}
-                    />
-                    <SymmetryButton
-                        onClick={
-                            ()=>this.setState({
-                                verticalSymmetry: !this.state.verticalSymmetry
-                            }
-                        )}
-                        isActive={this.state.verticalSymmetry}
-                        className={""}
-                    />  <PlusButton 
-                        onClick={
-                            ()=>this.setState({
-                                inputNumber: ((this.state.inputNumber + 1) % 5) || 1
-                            }
-                        )}
-                    /> */
