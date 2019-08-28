@@ -8,13 +8,7 @@ function onMIDIFail(err) {
     // console.log(`MIDI initialization failed. ${err}`);
 }
 
-export const makeMIDImessage = (index, length, scale, musicalKey) => {
-    // const midiKeyNumbers = [
-    //     45, 47, 48, 50, 52, 54, 55, 57, 59, 61, 62, 64, 66, 67, 69, 71, 73, 74
-    // ];
-    const noteIndex = index % scale.value.length;
-    const noteToPlay = musicalKey+scale[noteIndex];
-
+export const makeMIDImessage = (noteToPlay, length) => {
     return {
         play() {
             (midiOut || { send: () => { } }).send([
@@ -52,6 +46,14 @@ const changeMIDIOut = (ev) => {
     }
 };
 const onMIDIInit = (midi) => {
+    
+  var allInputs = midi.inputs.values();
+  // loop over all available inputs and listen for any MIDI input
+  for (var input = allInputs.next(); input && !input.done; input = allInputs.next()) {
+    // when a MIDI value is received call the onMIDIMessage function
+    input.value.onmidimessage = (message)=>{console.log(message.data)};
+  }
+
     midiAccess = midi;
     // eslint-disable-next-line no-undef
     selectMIDIOut = document.getElementById('midiOut');

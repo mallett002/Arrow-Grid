@@ -62,6 +62,6 @@ const scales = {
 };
 
 export default Object.keys(scales).map((scale) => ({
-    label: scale,
+    label: scale.toUpperCase(),
     value: scales[scale]
 })); 

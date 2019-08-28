@@ -1,5 +1,6 @@
 import React from 'react';
 import introJs from 'intro.js';
+import {range} from 'ramda';
 import {
     PlayButton,
     PauseButton,
@@ -7,7 +8,10 @@ import {
     PrevButton,
     NextButton
 } from 'react-player-controls';
-import {makePizzaSound} from './play-notes';
+import {
+    makePizzaSound,
+    musicalNotes
+} from './play-notes';
 import {
     emptyGrid,
     newGrid,
@@ -87,7 +91,7 @@ export class Application extends React.Component {
             forwardDiagonalSymmetry: false,
             inputNumber: 1,
             scale: scales[0],
-            musicalKey: 45
+            musicalKey: {label:'C4',value:60}
         };
         setUpCanvas(this.state);
     }
@@ -157,7 +161,7 @@ export class Application extends React.Component {
             },
             length,
             this.state.scale,
-            this.state.musicalKey)
+            this.state.musicalKey.value)
         });
     }
     newInputDirection = (inputDirection) => {
@@ -236,6 +240,10 @@ export class Application extends React.Component {
 
     updateScale = (scale) => {
         this.setState({scale});
+    };
+
+    updateMusicalKey = (musicalKey) => {
+        this.setState({musicalKey});
     };
 
     render() {
@@ -528,6 +536,13 @@ export class Application extends React.Component {
                     onChange={this.updateScale}
                     value={this.state.scale.label}
                     placeholder={this.state.scale.label}
+                />
+                
+                <Dropdown
+                    options={range(21,109).map((midiNote)=>({label:musicalNotes[midiNote-21].toUpperCase(),value:midiNote}))}
+                    onChange={this.updateMusicalKey}
+                    value={this.state.musicalKey}
+                    placeholder={this.state.musicalKey}
                 />
             </div>
         );
