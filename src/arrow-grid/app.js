@@ -45,7 +45,6 @@ import {setSliderOnChange} from './sliders';
 import presets from './presets';
 import Chance from 'chance';
 import scales from './scales';
-import Dropdown from 'react-dropdown';
 
 const chance = new Chance();
 
@@ -65,7 +64,8 @@ const minNoteLength = -500;
 const maxNoteLength = -50;
 const sound = {
     play() {
-        const theSound = makePizzaSound(1, undefined, 0.001);
+        // index, length, scale, musicalKey
+        const theSound = makePizzaSound(1, 0.001, [0], 60);
         theSound.play();
         setTimeout(() => {
             theSound.stop();
@@ -96,8 +96,8 @@ export class Application extends React.Component {
             backwardDiagonalSymmetry: false,
             forwardDiagonalSymmetry: false,
             inputNumber: 1,
-            scale: scales[0],
-            musicalKey: {label:'C4',value:60}
+            scale: scales[0].value,
+            musicalKey: 60
         };
         setUpCanvas(this.state);
     }
@@ -167,7 +167,7 @@ export class Application extends React.Component {
             },
             length,
             this.state.scale,
-            this.state.musicalKey.value)
+            this.state.musicalKey)
         });
     }
     newInputDirection = (inputDirection) => {
@@ -244,14 +244,12 @@ export class Application extends React.Component {
         window.open(shareUrl,'newwindow','width=300,height=250');return false;
     }
 
-    updateScale = (scale) => {
-        console.log({scale})
-        this.setState({scale});
+    updateScale = (event) => {
+        this.setState({scale: event.nativeEvent.target.value.split(',').map((asdf)=>parseInt(asdf))});
     };
 
-    updateMusicalKey = (musicalKey) => {
-        console.log({musicalKey})
-        this.setState({musicalKey});
+    updateMusicalKey = (event) => {
+        this.setState({musicalKey: parseInt(event.nativeEvent.target.value)});
     };
 
     render() {
@@ -583,27 +581,21 @@ export class Application extends React.Component {
                 <select id="midiOut" className="arrow-input">
                     <option value="">Not connected</option>
                 </select>
-                <select className="arrow-input" onChange={this.updateScale}>
+                <select value={this.state.scale} className="arrow-input" onChange={this.updateScale}>
                     {scales.map((scale)=>(<option value={scale.value}>{scale.label}</option>))}
                 </select>
-                <select className="arrow-input" onChange={this.updateMusicalKey}>
-                    {range(21,109).map((midiNote)=>({label:musicalNotes[midiNote-21].toUpperCase(),value:midiNote})).map((musicalKey)=>(<option value={musicalKey.value}>{musicalKey.label}</option>))}
+                <select value={this.state.musicalKey} className="arrow-input" onChange={this.updateMusicalKey}>
+                    {
+                        range(21,109)
+                            .map((midiNote)=>({
+                                label:musicalNotes[midiNote-21].toUpperCase(),value:midiNote
+                            }))
+                            .map((musicalKey)=>(
+                                <option value={musicalKey.value}>{musicalKey.label}</option>
+                            ))
+                    }
                 </select>
                 
-                {/* <Dropdown
-                    className={'arrow-input'}
-                    options={scales}
-                    onChange={this.updateScale}
-                    value={this.state.scale.label}
-                    placeholder={this.state.scale.label}
-                />
-                
-                <Dropdown
-                    options={range(21,109).map((midiNote)=>({label:musicalNotes[midiNote-21].toUpperCase(),value:midiNote}))}
-                    onChange={this.updateMusicalKey}
-                    value={this.state.musicalKey}
-                    placeholder={this.state.musicalKey}
-                /> */}
             </div>
         );
     }

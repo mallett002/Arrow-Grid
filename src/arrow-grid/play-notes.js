@@ -22,7 +22,7 @@ export const musicalNotes = range(0, 8).reduce((accum, curr) => {
 }, []);
 
 function createNotesString(musicalKey, scale) {
-    const offsetScale = scale.value.map(noteInt => {
+    const offsetScale = scale.map(noteInt => {
         return noteInt + musicalKey;
     });
 
@@ -73,11 +73,11 @@ const sounds = (length, musicalKey, scale) => {
 };
 
 function generateHash(length, musicalKey, scale) {
-    return `l${length}m${musicalKey}s${scale.label}`;
+    return `l${length}m${musicalKey}s${scale}`;
 }
 
 export const makePizzaSound = (index, length, scale, musicalKey) => {
-    const noteIndex = index % scale.value.length;
+    const noteIndex = index % scale.length;
     const hash = generateHash(length, musicalKey, scale);
     if (!lengthSounds[hash]){
         lengthSounds[hash] = sounds(length, musicalKey, scale);
@@ -91,13 +91,12 @@ export const playSounds = (boundaryArrows, size, length, muted, scale, musicalKe
     
     boundaryArrows.map((arrow) => {
         const noteToPlay = getIndex(arrow.x, arrow.y, size, arrow.vector);
-
-        if (!muted && !alreadyPlayedMap[noteToPlay]) {
+        if (!muted && !alreadyPlayedMap[noteToPlay] ) {
             alreadyPlayedMap[noteToPlay] = [noteToPlay];
             const snd = makePizzaSound(noteToPlay, length, scale, musicalKey);
             sounds.push(snd);
         }
-        makeMIDImessage(musicalKey+noteToPlay, length).play();
+        makeMIDImessage(musicalKey+scale[noteToPlay%scale.length], length).play();
         return undefined;
     });
     if (!muted){
