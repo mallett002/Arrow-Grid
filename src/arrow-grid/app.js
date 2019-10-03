@@ -245,10 +245,12 @@ export class Application extends React.Component {
     }
 
     updateScale = (scale) => {
+        console.log({scale})
         this.setState({scale});
     };
 
     updateMusicalKey = (musicalKey) => {
+        console.log({musicalKey})
         this.setState({musicalKey});
     };
 
@@ -581,8 +583,15 @@ export class Application extends React.Component {
                 <select id="midiOut" className="arrow-input">
                     <option value="">Not connected</option>
                 </select>
+                <select className="arrow-input" onChange={this.updateScale}>
+                    {scales.map((scale)=>(<option value={scale.value}>{scale.label}</option>))}
+                </select>
+                <select className="arrow-input" onChange={this.updateMusicalKey}>
+                    {range(21,109).map((midiNote)=>({label:musicalNotes[midiNote-21].toUpperCase(),value:midiNote})).map((musicalKey)=>(<option value={musicalKey.value}>{musicalKey.label}</option>))}
+                </select>
                 
-                <Dropdown
+                {/* <Dropdown
+                    className={'arrow-input'}
                     options={scales}
                     onChange={this.updateScale}
                     value={this.state.scale.label}
@@ -594,7 +603,7 @@ export class Application extends React.Component {
                     onChange={this.updateMusicalKey}
                     value={this.state.musicalKey}
                     placeholder={this.state.musicalKey}
-                />
+                /> */}
             </div>
         );
     }

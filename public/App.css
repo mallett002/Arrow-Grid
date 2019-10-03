@@ -651,6 +651,19 @@ select {
   border-style: solid;
   border-radius: 15px; }
 
+.reactdropdown {
+  background-color: transparent;
+  color: white;
+  border-radius: 2px;
+  padding: 5px 0px 5px 0px;
+  margin: 5px 5px;
+  width: 145px;
+  text-align: center;
+  border-color: white;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 15px; }
+
 .description {
   display: none; }
 
